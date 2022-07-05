@@ -42,15 +42,15 @@ builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
     {
         var cred = new ManagedIdentityCredential();
         config.AddAzureAppConfiguration(options =>
-                options.Connect(new Uri(settings["AzureAppConfigConnection"]), cred));
-                            //.ConfigureKeyVault(kv => { kv.SetCredential(cred); }));
+                options.Connect(new Uri(settings["AzureAppConfigConnection"]), cred)
+                            .ConfigureKeyVault(kv => { kv.SetCredential(cred); }));
     }
     else
     {
         var cred = new DefaultAzureCredential();
         config.AddAzureAppConfiguration(options =>
-            options.Connect(settings["AzureAppConfigConnection"]));
-                   //.ConfigureKeyVault(kv => kv.SetCredential(cred)));
+            options.Connect(settings["AzureAppConfigConnection"])
+                   .ConfigureKeyVault(kv => kv.SetCredential(cred)));
     }
 });
 
